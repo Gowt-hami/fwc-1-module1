@@ -1,0 +1,224 @@
+\def\mytitle{ASSIGNMENT-1}
+\def\mykeywords{}
+\def\myauthor{Mandava.Gowthami}
+\def\contact{gowthamimandava999@gmailcom}
+\def\mymodule{ Future Wireless Communication(FWC22033)}
+% #######################################
+% #### YOU DON'T NEED TO TOUCH BELOW ####
+% #######################################
+\documentclass[10pt, a4paper]{article}
+\usepackage[a4paper,outer=1.5cm,inner=1.5cm,top=1.75cm,bottom=1.5cm]{geometry}
+\twocolumn
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+%colour our links, remove weird boxes
+\usepackage[colorlinks,linkcolor={black},citecolor={blue!80!black},urlcolor={blue!80!black}]{hyperref}
+%Stop indentation on new paragraphs
+\usepackage[parfill]{parskip}
+%% Arial-like font
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\renewcommand*\familydefault{\sfdefault}
+%Napier logo top right
+\usepackage{watermark}
+%Lorem Ipusm dolor please don't leave any in you final report ;)
+\usepackage{karnaugh-map}
+\usepackage{tabularx}
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumerate}
+%give us the Capital H that we all know and love
+\usepackage{float}
+%tone down the line spacing after section titles
+\usepackage{titlesec}
+%Cool maths printing
+\usepackage{amsmath}
+%PseudoCode
+\usepackage{algorithm2e}
+\usepackage{circuitikz}
+\usetikzlibrary{calc}
+
+\titlespacing{\subsection}{0pt}{\parskip}{-3pt}
+\titlespacing{\subsubsection}{0pt}{\parskip}{-\parskip}
+\titlespacing{\paragraph}{0pt}{\parskip}{\parskip}
+\newcommand{\figuremacro}[5]{
+    \begin{figure}[#1]
+        \centering
+        \includegraphics[width=#5\columnwidth]{#2}
+        \caption[#3]{\textbf{#3}#4}
+        \label{fig:#2}
+    \end{figure}
+}
+
+\lstset{
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+
+\thiswatermark{\centering \put(1,-110.0){\includegraphics[scale=0.075]{logo}} 
+ \put(400,-90){\includegraphics[scale=0.2]{wisig-full}} }
+
+\title{\mytitle}
+\author{\myauthor\hspace{1em}\\\contact\\IITH\hspace{0.5em}-\hspace{0.5em}\mymodule}
+\date{}
+\hypersetup{pdfauthor=\myauthor,pdftitle=\mytitle,pdfkeywords=\mykeywords}
+\sloppy
+
+% #######################################
+% ########### START FROM HERE ###########
+% #######################################
+\begin{document}
+   
+	\maketitle
+	\tableofcontents
+	\begin{abstract}
+	   The objective of this manual is to find the Truth table and logical diagram for the Boolean Function 
+	           F=XY'Z+X'Y'Z+W'XY+WX'Y+WXY.
+	       
+	\end{abstract}
+
+\section{Components}
+\begin{tabularx}{0.45\textwidth} { 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X | }
+\hline
+\textbf{Component} & \textbf{Value} & \textbf{Quantity} \\      
+\hline
+Arduino & uno & 1 \\
+\hline
+LEd & - & 1 \\
+\hline
+Bread Board & - &1 \\
+\hline
+Jumper wires&M-M& 20\\
+\hline
+ \end{tabularx}
+
+\begin{center}
+    TABLE 1.0
+\end{center}
+	
+	\subsection{Arduino}
+	\hspace{10mm}
+	
+	The Arduino UNO has some ground pins, analog input pins A0-A3 and digital pins D1-D13 that can be used for both input as well as output. It also has two power pins that can generate 3.3V and 5V.In the following exercises, only the GND, 5V and digital pins will be used.
+	
+	
+	
+	\subsection{LED}
+	A light-emitting diode (LED) is a semiconductor light source that emits light when current flows through it. Electrons in the semiconductor recombine with electron holes, releasing energy in the form of photons (Energy packets). 
+	
+	\section{Implementation}
+	\subsection{Karnaugh Map}
+    \vspace{5mm}
+        F=XY'Z+X'Y'Z+W'XY+WX'Y+WXY     
+        \\F=Y'Z+YX+YW
+        
+      \begin{center}
+     \begin{karnaugh-map}[4][4][1][$YZ$][$WX$]
+        \minterms{1,1,5,6,7,9,10,11,13,14,15}
+        \maxterms{0,2,3,4,8,12}
+        \implicant{1}{9}
+        \implicant{7}{14}
+        \implicant{15}{10}
+    \end{karnaugh-map}
+    \end{center}
+     \begin{center}
+        FIGURE 2.1
+        \end{center}
+    
+TRUTH TABLE
+    
+    
+    \begin{center}
+\begin{tabularx}{0.5\textwidth} { 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X| }
+\hline
+\textbf{W} &\textbf{X} & \textbf{Y} & \textbf{Z} & \testbf{F} \\
+\hline
+0 & 0 & 0 & 0 & 0\\  
+\hline
+0 & 0 & 0 & 1 & 1 \\ 
+\hline
+0 & 0 & 1 & 0 & 0 \\
+\hline
+0 & 0 & 1 & 1 & 0 \\
+\hline
+0 & 1 & 0 & 0 & 0 \\  
+\hline
+0 & 1 & 0 & 1 & 1 \\ 
+\hline
+0 & 1 & 1 & 0 & 1 \\
+\hline
+0 & 1 & 1& 1 & 1 \\
+\hline
+1 & 0 & 0 & 0 & 0 \\
+\hline
+1 & 0 & 0 & 1 & 1 \\
+\hline
+1 & 0 & 1 & 0 & 1 \\
+\hline
+1 & 0 & 1 & 1 & 1 \\
+\hline
+1 & 1 & 0 & 0 & 0 \\
+\hline
+1 & 1 & 0 & 1 & 1 \\
+\hline
+1 & 1 & 1 & 0 & 1 \\
+\hline
+1 & 1 & 1 & 1 & 1 \\
+\hline
+\end{tabularx}
+\end{center} 
+
+
+
+	\section{HARDWARE}
+	\vsp
+	\begin{enumerate}[1.]
+\item Connect the Arduino to the computer.
+\item Download the following directory
+\begin{lstlisting}
+https://github.com/Gowt-hami/fwc-1-module1/tree/main/codess
+\end{lstlisting}
+%\item Now select Tools $\to$ Port $\to$ /dev/ttyACM0
+\item The LED beside pin 5 light up according to the input we give.
+\end{enumerate}
+
+\bibliographystyle{ieeetr}
+
+\section{Circuit diagram}
+
+
+
+
+\usetikzlibrary{calc}
+\begin{circuitikz} \draw
+
+(0,6) node[and port,number inputs=2]  (and1) {}
+(0,4) node[and port,number inputs=2]  (and2) {}
+(0,2) node[and port,number inputs=2]  (and3) {}
+(2,4) node[or port, number inputs=3] (or) {}
+(and1.out) -- (or.in 1)
+(and2.out) -- (or.in 2)
+(and3.out) -- (or.in 3);
+\node[left] at (and1.in 1) {\(Z\)};
+\node[left] at (and1.in 2) {\(Y\)};
+\node[left] at (and1.in 2)[ocirc] {};
+\node[left] at (and1.in 3)[] {};
+\node[left] at (and2.in 1) {\(Y\)};
+\node[left] at (and2.in 2) {\(W\)};
+\node[left] at (and2.in 2)[] {};
+\node[left] at (and3.in 1) {\(Y\)};
+\node[left] at (and3.in 2) {\(X\)};
+\node[right] at (or.out) {\((F=Y'Z+YX+YW)\)};
+
+\end{circuitikz}
+\end{document}
